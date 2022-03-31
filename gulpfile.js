@@ -4,8 +4,8 @@ const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
-const dist = "./dist/";
-// const dist = "/MAMP/htdocs/test_loan; // Ссылка на вашу папку на сервере
+//const dist = "./dist/";
+const dist = "/MAMP/htdocs/test_loan/"; // ссылка на папку для тестирования
 
 gulp.task("copy-html", () => {
     return gulp.src("./src/*.html")
