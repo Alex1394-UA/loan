@@ -4,8 +4,9 @@ export default class MainSlider extends Slider {
     constructor(btns) {
         super(btns);
     }
-
+    
     showSlides(n) {
+        
         if (n > this.slides.length) {
             this.slideIndex = 1;
         }

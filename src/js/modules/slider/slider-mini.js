@@ -3,6 +3,8 @@ import Slider from "./slider";
 export default class MiniSlider extends Slider {
     constructor(container, next, prev, activeClass, animate, autoplay) {
         super(container, next, prev, activeClass, animate, autoplay);
+        
+        this.paused = false; // for autoplay
     }
 
     decorizeSlides() {
@@ -23,24 +25,49 @@ export default class MiniSlider extends Slider {
             this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
         }
     }
-
-    nextSlide() {
-        if (this.slides[1].tagName == 'BUTTON' && this.slides[2].tagName == 'BUTTON') {
-            this.container.appendChild(this.slides[0]); // Slide
-            this.container.appendChild(this.slides[1]); // Btn
+    // вариант предложенный в уроке (с изменением порядка appendChild для фикса бага)
+    /* nextSlide() {
+        if (this.slides[1].type == "button" && this.slides[2].type == "button") {
             this.container.appendChild(this.slides[2]); // Btn
-            this.decorizeSlides();
-        } else if (this.slides[1].tagName == 'BUTTON') {
-            this.container.appendChild(this.slides[0]); // Slide
             this.container.appendChild(this.slides[1]); // Btn
+            this.container.appendChild(this.slides[0]); // Slide           
+            this.decorizeSlides();
+        } else if (this.slides[1].type == "button") {
+            this.container.appendChild(this.slides[1]); // Btn
+            this.container.appendChild(this.slides[0]); // Slide
             this.decorizeSlides();
         } else {
             this.container.appendChild(this.slides[0]);
             this.decorizeSlides();    
         }
+    } */
+
+    // более компактный вариант №1
+    nextSlide() {
+        if (this.prev.parentNode === this.container) {
+            this.container.insertBefore(this.slides[0], this.prev);
+        } else {
+            this.container.appendChild(this.slides[0]);
+        }        
+        this.decorizeSlides();
     }
 
+    // более компактный вариант №2
+    /* nextSlide() {
+        for (let i = 1; i < this.slides.length; i++) {
+            if (this.slides[i].tagName !== 'BUTTON') {
+                this.container.appendChild(this.slides[0]);
+                this.decorizeSlides();
+                break;
+            } else {
+                this.container.appendChild(this.slides[i]);
+                i--;
+            }
+        }
+    } */
+
     bindTriggers() {
+        
         this.next.addEventListener('click', () => this.nextSlide());
 
         this.prev.addEventListener('click', () => {
@@ -53,10 +80,12 @@ export default class MiniSlider extends Slider {
                     break;
                 }
             }
-
-            
         });
     }
+
+    activateAnimation() {
+        this.paused = setInterval(() => this.nextSlide(), 2000);
+    } // for autoplay
 
     init() {
         try {
@@ -70,8 +99,18 @@ export default class MiniSlider extends Slider {
             this.bindTriggers();
             this.decorizeSlides();
 
-            if (this.autoplay) {
+            /* if (this.autoplay) {
                 setInterval(() => this.nextSlide(), 5000);
+            } */  // old version, plays always
+
+            if (this.autoplay) {
+                this.activateAnimation();
+                this.container.addEventListener('mouseenter', () => clearInterval(this.paused));
+                this.next.addEventListener('mouseenter', () => clearInterval(this.paused));
+                this.prev.addEventListener('mouseenter', () => clearInterval(this.paused));
+                this.container.addEventListener('mouseleave', () => this.activateAnimation());
+                this.next.addEventListener('mouseleave', () => this.activateAnimation());
+                this.prev.addEventListener('mouseleave', () => this.activateAnimation());     
             }
         } catch(e) {}
     }

@@ -5079,6 +5079,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/playVideo */ "./src/js/modules/playVideo.js");
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showInfo */ "./src/js/modules/showInfo.js");
+/* harmony import */ var _modules_download__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/download */ "./src/js/modules/download.js");
+
+
 
 
 
@@ -5127,6 +5131,8 @@ window.addEventListener('DOMContentLoaded', function () {
   new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.module__video-item .play', '.overlay').init();
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold', '.officernew', '.officer__card-item').init();
   new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"]('.form').init();
+  new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"]('.plus__content').init();
+  new _modules_download__WEBPACK_IMPORTED_MODULE_6__["default"]('.download').init();
 });
 
 /***/ }),
@@ -5203,6 +5209,69 @@ function () {
   }]);
 
   return Difference;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/modules/download.js":
+/*!************************************!*\
+  !*** ./src/js/modules/download.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Download; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Download =
+/*#__PURE__*/
+function () {
+  function Download(triggers) {
+    _classCallCheck(this, Download);
+
+    this.btns = document.querySelectorAll(triggers);
+    this.path = 'assets/img/mainbg.jpg';
+  }
+
+  _createClass(Download, [{
+    key: "downloadItem",
+    value: function downloadItem(path) {
+      var element = document.createElement('a');
+      element.setAttribute('href', path);
+      element.setAttribute('download', 'nice_picture');
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.btns.forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.stopPropagation();
+
+          _this.downloadItem(_this.path);
+        });
+      });
+    }
+  }]);
+
+  return Download;
 }();
 
 
@@ -5536,6 +5605,55 @@ function () {
 
 /***/ }),
 
+/***/ "./src/js/modules/showInfo.js":
+/*!************************************!*\
+  !*** ./src/js/modules/showInfo.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ShowInfo; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ShowInfo =
+/*#__PURE__*/
+function () {
+  function ShowInfo(triggers) {
+    _classCallCheck(this, ShowInfo);
+
+    this.btns = document.querySelectorAll(triggers);
+  }
+
+  _createClass(ShowInfo, [{
+    key: "init",
+    value: function init() {
+      this.btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var sibling = btn.closest('.module__info-show').nextElementSibling;
+          sibling.classList.toggle('msg');
+          sibling.style.marginTop = '20px';
+        });
+      });
+    }
+  }]);
+
+  return ShowInfo;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/modules/slider/slider-main.js":
 /*!**********************************************!*\
   !*** ./src/js/modules/slider/slider-main.js ***!
@@ -5763,20 +5881,25 @@ function (_Slider) {
   _inherits(MiniSlider, _Slider);
 
   function MiniSlider(container, next, prev, activeClass, animate, autoplay) {
+    var _this;
+
     _classCallCheck(this, MiniSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, next, prev, activeClass, animate, autoplay));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, next, prev, activeClass, animate, autoplay));
+    _this.paused = false; // for autoplay
+
+    return _this;
   }
 
   _createClass(MiniSlider, [{
     key: "decorizeSlides",
     value: function decorizeSlides() {
-      var _this = this;
+      var _this2 = this;
 
       this.slides.forEach(function (slide) {
-        slide.classList.remove(_this.activeClass);
+        slide.classList.remove(_this2.activeClass);
 
-        if (_this.animate) {
+        if (_this2.animate) {
           slide.querySelector('.card__title').style.opacity = '0.4';
           slide.querySelector('.card__controls-arrow').style.opacity = '0';
         }
@@ -5790,45 +5913,66 @@ function (_Slider) {
         this.slides[0].querySelector('.card__title').style.opacity = '1';
         this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
       }
-    }
+    } // вариант предложенный в уроке (с изменением порядка appendChild для фикса бага)
+
+    /* nextSlide() {
+        if (this.slides[1].type == "button" && this.slides[2].type == "button") {
+            this.container.appendChild(this.slides[2]); // Btn
+            this.container.appendChild(this.slides[1]); // Btn
+            this.container.appendChild(this.slides[0]); // Slide           
+            this.decorizeSlides();
+        } else if (this.slides[1].type == "button") {
+            this.container.appendChild(this.slides[1]); // Btn
+            this.container.appendChild(this.slides[0]); // Slide
+            this.decorizeSlides();
+        } else {
+            this.container.appendChild(this.slides[0]);
+            this.decorizeSlides();    
+        }
+    } */
+    // более компактный вариант №1
+
   }, {
     key: "nextSlide",
     value: function nextSlide() {
-      if (this.slides[1].tagName == 'BUTTON' && this.slides[2].tagName == 'BUTTON') {
-        this.container.appendChild(this.slides[0]); // Slide
-
-        this.container.appendChild(this.slides[1]); // Btn
-
-        this.container.appendChild(this.slides[2]); // Btn
-
-        this.decorizeSlides();
-      } else if (this.slides[1].tagName == 'BUTTON') {
-        this.container.appendChild(this.slides[0]); // Slide
-
-        this.container.appendChild(this.slides[1]); // Btn
-
-        this.decorizeSlides();
+      if (this.prev.parentNode === this.container) {
+        this.container.insertBefore(this.slides[0], this.prev);
       } else {
         this.container.appendChild(this.slides[0]);
-        this.decorizeSlides();
       }
-    }
+
+      this.decorizeSlides();
+    } // более компактный вариант №2
+
+    /* nextSlide() {
+        for (let i = 1; i < this.slides.length; i++) {
+            if (this.slides[i].tagName !== 'BUTTON') {
+                this.container.appendChild(this.slides[0]);
+                this.decorizeSlides();
+                break;
+            } else {
+                this.container.appendChild(this.slides[i]);
+                i--;
+            }
+        }
+    } */
+
   }, {
     key: "bindTriggers",
     value: function bindTriggers() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.next.addEventListener('click', function () {
-        return _this2.nextSlide();
+        return _this3.nextSlide();
       });
       this.prev.addEventListener('click', function () {
-        for (var i = _this2.slides.length - 1; i > 0; i--) {
-          if (_this2.slides[i].tagName !== "BUTTON") {
-            var active = _this2.slides[i];
+        for (var i = _this3.slides.length - 1; i > 0; i--) {
+          if (_this3.slides[i].tagName !== "BUTTON") {
+            var active = _this3.slides[i];
 
-            _this2.container.insertBefore(active, _this2.slides[0]);
+            _this3.container.insertBefore(active, _this3.slides[0]);
 
-            _this2.decorizeSlides();
+            _this3.decorizeSlides();
 
             break;
           }
@@ -5836,19 +5980,49 @@ function (_Slider) {
       });
     }
   }, {
+    key: "activateAnimation",
+    value: function activateAnimation() {
+      var _this4 = this;
+
+      this.paused = setInterval(function () {
+        return _this4.nextSlide();
+      }, 2000);
+    } // for autoplay
+
+  }, {
     key: "init",
     value: function init() {
-      var _this3 = this;
+      var _this5 = this;
 
       try {
         this.container.style.cssText = "\n            display: flex;\n            flex-wrap: wrap;\n            overflow: hidden;\n            align-items: flex-start;\n            ";
         this.bindTriggers();
         this.decorizeSlides();
+        /* if (this.autoplay) {
+            setInterval(() => this.nextSlide(), 5000);
+        } */
+        // old version, plays always
 
         if (this.autoplay) {
-          setInterval(function () {
-            return _this3.nextSlide();
-          }, 5000);
+          this.activateAnimation();
+          this.container.addEventListener('mouseenter', function () {
+            return clearInterval(_this5.paused);
+          });
+          this.next.addEventListener('mouseenter', function () {
+            return clearInterval(_this5.paused);
+          });
+          this.prev.addEventListener('mouseenter', function () {
+            return clearInterval(_this5.paused);
+          });
+          this.container.addEventListener('mouseleave', function () {
+            return _this5.activateAnimation();
+          });
+          this.next.addEventListener('mouseleave', function () {
+            return _this5.activateAnimation();
+          });
+          this.prev.addEventListener('mouseleave', function () {
+            return _this5.activateAnimation();
+          });
         }
       } catch (e) {}
     }
