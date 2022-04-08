@@ -5767,8 +5767,8 @@ function (_Slider) {
       this.showSlides(this.slideIndex += n);
     }
   }, {
-    key: "bindTriggers",
-    value: function bindTriggers(lateralBtn, direction) {
+    key: "bindVertTriggers",
+    value: function bindVertTriggers() {
       var _this2 = this;
 
       this.btns.forEach(function (item) {
@@ -5782,12 +5782,18 @@ function (_Slider) {
           _this2.showSlides(_this2.slideIndex);
         });
       });
+    }
+  }, {
+    key: "bindHorizTriggers",
+    value: function bindHorizTriggers(lateralBtn, direction) {
+      var _this3 = this;
+
       document.querySelectorAll(lateralBtn).forEach(function (item) {
         item.addEventListener('click', function (e) {
           e.stopPropagation();
           e.preventDefault();
 
-          _this2.plusSlides(direction);
+          _this3.plusSlides(direction);
         });
       }); // убрано повторение кода
 
@@ -5808,8 +5814,9 @@ function (_Slider) {
         } catch (e) {}
 
         this.showSlides(this.slideIndex);
-        this.bindTriggers('.prevmodule', -1);
-        this.bindTriggers('.nextmodule', 1);
+        this.bindVertTriggers();
+        this.bindHorizTriggers('.prevmodule', -1);
+        this.bindHorizTriggers('.nextmodule', 1);
       }
     }
   }]);

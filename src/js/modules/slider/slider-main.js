@@ -39,7 +39,7 @@ export default class MainSlider extends Slider {
         this.showSlides(this.slideIndex += n);
     }
 
-    bindTriggers(lateralBtn, direction) {
+    bindVertTriggers() {
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
                 this.plusSlides(1);
@@ -51,7 +51,9 @@ export default class MainSlider extends Slider {
                 this.showSlides(this.slideIndex);
             });
         });
+    }
 
+    bindHorizTriggers(lateralBtn, direction) {
         document.querySelectorAll(lateralBtn).forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -78,8 +80,9 @@ export default class MainSlider extends Slider {
             } catch(e){}
     
             this.showSlides(this.slideIndex);
-            this.bindTriggers('.prevmodule', -1);
-            this.bindTriggers('.nextmodule', 1);
+            this.bindVertTriggers();
+            this.bindHorizTriggers('.prevmodule', -1);
+            this.bindHorizTriggers('.nextmodule', 1);
         }
     }
 }
