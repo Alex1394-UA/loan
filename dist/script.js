@@ -5179,9 +5179,13 @@ function () {
     value: function bindTriggers(container, items, counter) {
       container.querySelector('.plus').addEventListener('click', function () {
         if (counter !== items.length - 2) {
+          items[counter].classList.add("animated");
+          items[counter].classList.add("bounceIn");
           items[counter].style.display = 'flex';
           counter++;
         } else {
+          items[counter].classList.add("animated");
+          items[counter].classList.add("bounceIn");
           items[counter].style.display = 'flex';
           items[items.length - 1].remove();
         }
@@ -5764,7 +5768,7 @@ function (_Slider) {
     }
   }, {
     key: "bindTriggers",
-    value: function bindTriggers() {
+    value: function bindTriggers(lateralBtn, direction) {
       var _this2 = this;
 
       this.btns.forEach(function (item) {
@@ -5778,22 +5782,22 @@ function (_Slider) {
           _this2.showSlides(_this2.slideIndex);
         });
       });
-      document.querySelectorAll('.prevmodule').forEach(function (item) {
+      document.querySelectorAll(lateralBtn).forEach(function (item) {
         item.addEventListener('click', function (e) {
           e.stopPropagation();
           e.preventDefault();
 
-          _this2.plusSlides(-1);
+          _this2.plusSlides(direction);
         });
-      });
-      document.querySelectorAll('.nextmodule').forEach(function (item) {
-        item.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
+      }); // убрано повторение кода
 
-          _this2.plusSlides(1);
-        });
-      });
+      /* document.querySelectorAll('.nextmodule').forEach(item => {
+          item.addEventListener('click', (e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              this.plusSlides(1);
+          });
+      }); */
     }
   }, {
     key: "render",
@@ -5804,7 +5808,8 @@ function (_Slider) {
         } catch (e) {}
 
         this.showSlides(this.slideIndex);
-        this.bindTriggers();
+        this.bindTriggers('.prevmodule', -1);
+        this.bindTriggers('.nextmodule', 1);
       }
     }
   }]);

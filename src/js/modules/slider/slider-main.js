@@ -39,7 +39,7 @@ export default class MainSlider extends Slider {
         this.showSlides(this.slideIndex += n);
     }
 
-    bindTriggers() {
+    bindTriggers(lateralBtn, direction) {
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
                 this.plusSlides(1);
@@ -52,21 +52,23 @@ export default class MainSlider extends Slider {
             });
         });
 
-        document.querySelectorAll('.prevmodule').forEach(item => {
+        document.querySelectorAll(lateralBtn).forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                this.plusSlides(-1);
+                this.plusSlides(direction);
             });
         });
 
-        document.querySelectorAll('.nextmodule').forEach(item => {
+        // убрано повторение кода
+
+        /* document.querySelectorAll('.nextmodule').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 this.plusSlides(1);
             });
-        });
+        }); */
     }
 
     render() {
@@ -76,7 +78,8 @@ export default class MainSlider extends Slider {
             } catch(e){}
     
             this.showSlides(this.slideIndex);
-            this.bindTriggers();
+            this.bindTriggers('.prevmodule', -1);
+            this.bindTriggers('.nextmodule', 1);
         }
     }
 }

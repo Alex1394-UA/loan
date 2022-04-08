@@ -14,11 +14,15 @@ export default class Difference {
     bindTriggers(container, items, counter) {
         container.querySelector('.plus').addEventListener('click', () => {
             if (counter !== items.length - 2) {
+                items[counter].classList.add("animated");
+                items[counter].classList.add("bounceIn");
                 items[counter].style.display = 'flex';
                 counter++;
             } else {
+                items[counter].classList.add("animated");
+                items[counter].classList.add("bounceIn");
                 items[counter].style.display = 'flex';
-                items[items.length - 1].remove(); 
+                items[items.length - 1].remove();
             }
         });
     }
