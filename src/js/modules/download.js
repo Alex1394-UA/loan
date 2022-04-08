@@ -5,25 +5,25 @@ export default class Download {
     }
 
     downloadItem(path) {
-        const element = document.createElement('a');
+        const link = document.createElement('a');
 
-        element.setAttribute('href', path);
-        element.setAttribute('download', 'nice_picture');
+        link.setAttribute('href', path);
+        link.setAttribute('download', 'nice_picture');
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
+        link.style.display = 'none';
+        document.body.appendChild(link);
 
-        element.click();
+        link.click();
         
 
-        document.body.removeChild(element);
+        document.body.removeChild(link);
     }
 
     init() {
         this.btns.forEach(item => {
             item.addEventListener('click', (e) => {
 
-                e.stopPropagation();
+                e.stopPropagation(); // чтобы не перебрасывало на первый слайд
                 this.downloadItem(this.path);
             });
         });
